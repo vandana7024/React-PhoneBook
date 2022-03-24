@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useReducer } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { MdOutlinePhone, MdPersonOutline } from "react-icons/md";
+import AvatorCard from "./AvatorCard";
 
 function EditContact() {
   const navigate = useNavigate();
@@ -38,40 +40,45 @@ function EditContact() {
   console.log("records", records);
 
   return (
-    <div>
-      EditContact
-      <div>
-        <label htmlFor="">First Name</label>
-        <input
-          type="text"
-          placeholder="First Name"
-          name="name"
-          value={records.name}
-          onChange={handleRecord}
-        />
-      </div>
-      <div className="">
-        <label htmlFor="">Last Name</label>
-        <input
-          type="text"
-          name="lastName"
-          placeholder="Last Name"
-          value={records.lastName}
-          onChange={handleRecord}
-        />
-      </div>
-      <div>
-        <label htmlFor="">Mobile Number</label>
-        <input
-          type="number"
-          placeholder="Mobile Number"
-          name="number"
-          value={records.number}
-          onChange={handleRecord}
-        />
-      </div>
-      <button onClick={handleSubmit}>submit</button>
-    </div>
+    <>
+      <section className="flex flex-col justify-center items-center">
+        <AvatorCard name={records.name} />
+        <h1 className="text-blue-800 mt-6 font-medium text-3xl">
+          {records.name}
+        </h1>
+
+        <div className="max-w-[520px]">
+          <div className="flex gap-4 my-8 w-full items-center">
+            <MdPersonOutline size={28} className="opacity-[0.56]" />
+            <input
+              type="text"
+              placeholder="First Name"
+              name="name"
+              value={records.name}
+              onChange={handleRecord}
+              className="border-b w-full focus:outline-none leading-8"
+            />
+          </div>
+          <div className="flex gap-4 my-8 w-full items-center">
+            <MdOutlinePhone size={28} className="opacity-[0.56]" />
+            <input
+              type="number"
+              placeholder="Mobile Number"
+              name="number"
+              value={records.number}
+              onChange={handleRecord}
+              className="border-b w-full focus:outline-none leading-8"
+            />
+          </div>
+          <button
+            onClick={handleSubmit}
+            className="h-10 bg-[#1a73e8] text-white px-8 rounded disabled:grayscale"
+          >
+            Edit
+          </button>
+        </div>
+      </section>
+    </>
   );
 }
 
